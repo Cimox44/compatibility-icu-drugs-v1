@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICU Pharma Cardio — Farmaci, compatibilità Y, accessi vascolari</title>
+<meta name="description" content="Strumento interattivo per la terapia infusionale in Terapia Intensiva Cardiochirurgica: titolazione, compatibilità in Y, boli, accessi vascolari.">
+<meta name="theme-color" content="#0B2545">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ICU Pharma">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="ecg" aria-hidden="true">
+      <svg viewBox="0 0 120 32" preserveAspectRatio="none">
+        <polyline class="ecg-line" points="0,16 18,16 24,16 28,6 33,26 38,13 43,16 62,16 68,16 72,10 76,22 80,16 120,16"/>
+      </svg>
+    </div>
+    <div class="brand-txt">
+      <h1>ICU Pharma <span>Cardio</span></h1>
+      <p>Terapia infusionale in Terapia Intensiva Cardiochirurgica</p>
+    </div>
+  </div>
+  <button id="btnHelp" class="ghost-btn" type="button" aria-label="Note metodologiche">Metodo &amp; fonti</button>
+</header>
+
+<div class="warn-strip" role="note">
+  <strong>Strumento di supporto decisionale.</strong> Non sostituisce RCP/scheda tecnica, protocollo aziendale, né la consulenza del farmacista.
+  <em>Assenza di dato ≠ compatibilità.</em> Verificare sempre concentrazione, solvente e fonte primaria prima della somministrazione.
+</div>
+
+<nav class="tabs" role="tablist">
+  <button class="tab is-active" role="tab" data-view="farmaci">Farmaci</button>
+  <button class="tab" role="tab" data-view="ysite">Compatibilità in Y</button>
+  <button class="tab" role="tab" data-view="lume">Simulatore lume</button>
+  <button class="tab" role="tab" data-view="accessi">Accesso vascolare</button>
+  <button class="tab" role="tab" data-view="calc">Titolazione</button>
+  <button class="tab" role="tab" data-view="boli">Boli &amp; emergenze</button>
+</nav>
+
+<main>
+
+  <!-- ============ FARMACI ============ -->
+  <section id="view-farmaci" class="view is-active">
+    <div class="search-wrap">
+      <input id="q" type="search" placeholder="Cerca farmaco, classe o sinonimo (es. noradrenalina, NA, inotropo…)" autocomplete="off">
+      <span id="count" class="count"></span>
+    </div>
+
+    <div class="filters">
+      <div id="catChips" class="chips" aria-label="Filtra per classe"></div>
+      <div class="chips chips-alt" aria-label="Filtri rapidi">
+        <button class="chip" data-flag="ves">Solo vescicanti</button>
+        <button class="chip" data-flag="cvc">Richiede CVC</button>
+        <button class="chip" data-flag="perif">Compatibile periferica</button>
+        <button class="chip" data-flag="ded">Linea dedicata</button>
+      </div>
+    </div>
+
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <!-- ============ Y-SITE ============ -->
+  <section id="view-ysite" class="view">
+    <div class="panel">
+      <h2>Compatibilità in Y (co-somministrazione al raccordo)</h2>
+      <p class="lead">Seleziona due farmaci per interrogare la matrice. Il verdetto vale per le concentrazioni standard indicate nella scheda: concentrazioni diverse possono ribaltare il risultato.</p>
+      <div class="pair">
+        <label>Farmaco A
+          <div class="combo">
+            <input id="yA" type="text" class="combo-input" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="yA-list" placeholder="Scrivi nome, sinonimo o classe…" autocomplete="off">
+            <button class="combo-toggle" type="button" data-for="yA" aria-label="Apri elenco completo dei farmaci">▾</button>
+            <ul class="combo-list" id="yA-list" role="listbox"></ul>
+          </div>
+        </label>
+        <span class="ypipe" aria-hidden="true">Y</span>
+        <label>Farmaco B
+          <div class="combo">
+            <input id="yB" type="text" class="combo-input" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="yB-list" placeholder="Scrivi nome, sinonimo o classe…" autocomplete="off">
+            <button class="combo-toggle" type="button" data-for="yB" aria-label="Apri elenco completo dei farmaci">▾</button>
+            <ul class="combo-list" id="yB-list" role="listbox"></ul>
+          </div>
+        </label>
+      </div>
+      <p class="hint">Scrivi liberamente (es. <em>nora</em>, <em>lasix</em>, <em>glicopeptide</em>) e scegli dai suggerimenti, oppure premi <strong>▾</strong> per l'elenco completo.</p>
+      <div id="yResult" class="verdict-slot"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Regole strutturali (valide anche in assenza di dato specifico)</h2>
+      <div class="table-scroll">
+        <table class="tbl">
+          <thead><tr><th>Regola</th><th>Razionale</th><th>Esempi</th></tr></thead>
+          <tbody id="regoleY"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIMULATORE LUME ============ -->
+  <section id="view-lume" class="view">
+    <div class="panel">
+      <h2>Simulatore di lume / rubinetto</h2>
+      <p class="lead">Aggiungi i farmaci che condividono la stessa via e ottieni la matrice a coppie, gli allarmi di linea dedicata e la sequenza consigliata sul rubinetto a tre vie.</p>
+      <div class="pair pair-single">
+        <label>Aggiungi farmaco al lume
+          <div class="combo">
+            <input id="lumeAdd" type="text" class="combo-input" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="lumeAdd-list" placeholder="Scrivi nome, sinonimo o classe…" autocomplete="off">
+            <button class="combo-toggle" type="button" data-for="lumeAdd" aria-label="Apri elenco completo dei farmaci">▾</button>
+            <ul class="combo-list" id="lumeAdd-list" role="listbox"></ul>
+          </div>
+        </label>
+        <button id="lumeClear" class="ghost-btn" type="button">Svuota</button>
+      </div>
+      <div id="lumeChips" class="chips chips-sel"></div>
+      <div id="lumeOut"></div>
+    </div>
+  </section>
+
+  <!-- ============ ACCESSI ============ -->
+  <section id="view-accessi" class="view">
+    <div class="panel">
+      <h2>Criteri di scelta dell'accesso venoso</h2>
+      <div class="table-scroll">
+        <table class="tbl">
+          <thead><tr><th>Presidio</th><th>Punta</th><th>pH ammesso</th><th>Osmolarità</th><th>Vescicanti</th><th>Note operative</th></tr></thead>
+          <tbody id="tblAccessi"></tbody>
+        </table>
+      </div>
+      <p class="fine">Fonti: INS <em>Infusion Therapy Standards of Practice</em> 9ª ed. (2024); Gorski et al., lista vescicanti non antineoplastici, aggiornamento 2024; ERPIUP consensus (WoCoVA); Raccomandazioni GAVeCeLT 2024.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Farmaci per via di somministrazione</h2>
+      <div class="chips chips-alt" id="accFilter">
+        <button class="chip is-on" data-acc="all">Tutti</button>
+        <button class="chip" data-acc="cvc">Solo CVC/PICC</button>
+        <button class="chip" data-acc="pvc">Periferica OK</button>
+        <button class="chip" data-acc="mid">Midline OK</button>
+      </div>
+      <div class="table-scroll">
+        <table class="tbl">
+          <thead><tr><th>Farmaco</th><th>pH</th><th>Osm (mOsm/L)</th><th>Vescicante</th><th>CVC</th><th>Periferica</th><th>PICC</th><th>Midline</th></tr></thead>
+          <tbody id="tblVie"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Stravaso: riconoscimento e gestione</h2>
+      <div id="stravaso"></div>
+    </div>
+  </section>
+
+  <!-- ============ CALCOLATORE ============ -->
+  <section id="view-calc" class="view">
+    <div class="panel">
+      <h2>Calcolatore di titolazione</h2>
+      <div class="calc-grid">
+        <label>Farmaco
+          <select id="cFarmaco"></select>
+        </label>
+        <label>Peso (kg)
+          <input id="cPeso" type="number" min="1" max="250" step="0.5" value="70">
+        </label>
+        <label>Quantità in siringa
+          <input id="cMg" type="number" min="0.001" step="0.1" value="8">
+        </label>
+        <label>Unità
+          <select id="cUnit">
+            <option value="mg">mg</option>
+            <option value="mcg">mcg</option>
+            <option value="UI">UI</option>
+            <option value="g">g</option>
+          </select>
+        </label>
+        <label>Volume totale (mL)
+          <input id="cVol" type="number" min="1" step="1" value="50">
+        </label>
+        <label>Modalità dose
+          <select id="cMode">
+            <option value="mcgkgmin">mcg/kg/min</option>
+            <option value="mcgmin">mcg/min</option>
+            <option value="mgh">mg/h</option>
+            <option value="mgkgh">mg/kg/h</option>
+            <option value="UImin">UI/min</option>
+            <option value="UIkgh">UI/kg/h</option>
+            <option value="ngkgmin">ng/kg/min</option>
+          </select>
+        </label>
+        <label>Dose
+          <input id="cDose" type="number" min="0" step="0.01" value="0.1">
+        </label>
+        <label>Velocità (mL/h)
+          <input id="cRate" type="number" min="0" step="0.1">
+        </label>
+      </div>
+      <div id="cOut" class="calc-out"></div>
+      <div id="cLadder"></div>
+    </div>
+  </section>
+
+  <!-- ============ BOLI ============ -->
+  <section id="view-boli" class="view">
+    <div class="panel">
+      <h2>Boli, dosi di carico e push-dose</h2>
+      <div class="search-wrap">
+        <input id="qBolo" type="search" placeholder="Filtra i boli…" autocomplete="off">
+      </div>
+      <div class="table-scroll">
+        <table class="tbl">
+          <thead><tr><th>Farmaco</th><th>Bolo / carico</th><th>Velocità max e diluizione</th><th>Rubinetto</th></tr></thead>
+          <tbody id="tblBoli"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Regole del rubinetto a tre vie</h2>
+      <ol id="regoleRub" class="rules"></ol>
+    </div>
+  </section>
+
+</main>
+
+<!-- Scheda farmaco -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card">
+    <button id="modalClose" class="modal-x" type="button" aria-label="Chiudi">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>ICU Pharma Cardio</strong> — build <span id="build"></span>. Dati derivati da RCP italiane, Trissel's <em>Handbook on Injectable Drugs</em>, King Guide to Parenteral Admixtures, INS 2024, GAVeCeLT/ERPIUP, ESC/EACTS/STS/ESAIC. Uso professionale, verifica locale obbligatoria.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
