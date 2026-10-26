@@ -21,7 +21,7 @@
    ASSENZA DI DATO NON EQUIVALE A COMPATIBILITA'.
    ========================================================================== */
 
-const BUILD = "2026.07";
+const BUILD = "v2.0 · 26/10/2026";
 
 const CATEGORIE = {
   vaso:  "Vasopressori e inotropi",
@@ -133,17 +133,17 @@ const FARMACI = [
 },
 {
  id:"enox", n:"Enoximone", s:"perfan PDE3", c:"Inibitore PDE-3", cat:"vaso",
- prep:"100 mg (20 mL) diluiti fino a 40 mL con G5% o acqua ppi (2,5 mg/mL)",
- solv:"G5% o acqua per preparazioni iniettabili. NON usare NaCl 0,9% (cristallizzazione).",
- dose:"5–20 mcg/kg/min",
- tit:"Carico 0,5 mg/kg lento (≤12,5 mg/min) frazionato, poi 5–10 mcg/kg/min. Titolare su IC e PAOP.",
+ prep:"100 mg (20 mL) diluiti 1:1 fino a 40 mL con NaCl 0,9% o acqua ppi (2,5 mg/mL), in siringa di PLASTICA",
+ solv:"ESCLUSIVAMENTE NaCl 0,9% o acqua ppi. MAI glucosata (cristallizzazione). Solo contenitori e siringhe di plastica: nel vetro si formano cristalli entro 1 h.",
+ dose:"5–20 mcg/kg/min per non oltre 48 h (RCP)",
+ tit:"Carico 0,5–1 mg/kg lento (≤12,5 mg/min), poi 0,5 mg/kg ogni 30 min fino a risposta o 3 mg/kg cumulativi (spesso omesso per ipotensione); mantenimento 5–20 mcg/kg/min per non oltre 48 h. Titolare su IC e PAOP; ridurre dose o frequenza nell'insufficienza renale.",
  bolo:"0,5–1 mg/kg lento, frazionato.",
  ph:"≈11,8 (concentrato: fortemente alcalino)", osm:"variabile", ves:"alto",
  cvc:"pref", pvc:"no", picc:"si", mid:"no", ded:true,
  rub:"Linea dedicata. Il pH marcatamente alcalino lo rende incompatibile con quasi tutti i farmaci acidi in Y.",
  inc:["nora","adre","dopa","dobu","furo","insu","mida"],
  com:[],
- note:"Reagisce con la plastica di alcuni set: usare siringhe e deflussori compatibili secondo scheda tecnica (evitare PVC dove indicato). Precipita a contatto con soluzioni saline.",
+ note:"RCP: diluire solo con NaCl 0,9% o acqua ppi e usare esclusivamente contenitori di plastica (nel vetro e con il glucosio cristallizza). Soluzione diluita stabile 24 h a temperatura ambiente, non refrigerare. [Corretto in v2.0: la v1 indicava la glucosata come diluente e sconsigliava la plastica.]",
  ant:"pH >9: gestire come stravaso di soluzione fortemente alcalina — stop, aspirazione, impacchi tiepidi, consulenza chirurgica se stadio 3–4."
 },
 {
@@ -163,10 +163,10 @@ const FARMACI = [
 },
 {
  id:"terl", n:"Terlipressina", s:"glypressin", c:"Analogo della vasopressina", cat:"vaso",
- prep:"1 mg in 5–10 mL NaCl 0,9% per bolo; infusione 4–6 mg in 24 h",
+ prep:"1 mg in 5–10 mL NaCl 0,9% per bolo; infusione continua 2–12 mg/24 h (es. 4 mg in 48 mL a 2 mL/h = 4 mg/24 h)",
  solv:"NaCl 0,9%",
- dose:"Bolo 1 mg ogni 4–6 h oppure infusione continua 2–6 mg/24 h",
- tit:"Nella sindrome epatorenale e nella vasoplegia refrattaria. Sorvegliare ischemia periferica e mesenterica, iponatriemia.",
+ dose:"Infusione continua (preferita: meno eventi avversi) avvio 2 mg/24 h fino a max 12 mg/24 h; in alternativa boli 0,5–1 mg ogni 4–6 h",
+ tit:"Nella sindrome epatorenale (EMA 2022) e, off-label, nella vasoplegia refrattaria (1–1,3 mcg/kg/h). EMA 2022: rischio di insufficienza respiratoria grave o fatale, soprattutto con sovraccarico di volume; evitare con creatinina ≥5 mg/dL, ACLF di grado 3 o MELD ≥39; ridurre i fluidi e sospendere se compaiono sintomi respiratori. Sorvegliare ischemia periferica e mesenterica, iponatriemia.",
  bolo:"1–2 mg ev lento in 1–2 min.",
  ph:"≈4", osm:"≈290", ves:"mod",
  cvc:"si", pvc:"cauto", picc:"si", mid:"no", ded:false,
@@ -176,7 +176,7 @@ const FARMACI = [
  ant:"Impacchi tiepidi; valutare fentolamina se ischemia locale marcata."
 },
 {
- id:"feni", n:"Fenilefrina", s:"neosinefrina alfa1 puro", c:"Alfa-1 agonista puro", cat:"resp",
+ id:"feni", n:"Fenilefrina", s:"neosinefrina alfa1 puro", c:"Alfa-1 agonista puro", cat:"vaso",
  prep:"10 mg in 100 mL (100 mcg/mL) per infusione; siringa push-dose 100 mcg/mL",
  solv:"NaCl 0,9% o G5%",
  dose:"0,1–3 mcg/kg/min (o 20–200 mcg/min)",
@@ -234,7 +234,7 @@ const FARMACI = [
 },
 {
  id:"angi", n:"Angiotensina II", s:"giapreza AT2", c:"Vasopressore del sistema renina-angiotensina", cat:"vaso",
- prep:"2,5 mg in 500 mL NaCl 0,9% (5 ng/mL) o 5 mg/250 mL (20 ng/mL)",
+ prep:"2,5 mg in 500 mL NaCl 0,9% (5.000 ng/mL = 5 mcg/mL) o 2,5 mg in 250 mL (10.000 ng/mL) in restrizione idrica",
  solv:"NaCl 0,9%",
  dose:"Start 20 ng/kg/min; mantenimento 1,25–40 ng/kg/min",
  tit:"Incrementi di 15 ng/kg/min ogni 5 min nelle prime 3 h (max 80 ng/kg/min), poi max 40 ng/kg/min. Svezzare per decrementi di 15 ng/kg/min. Terzo agente nello shock vasoplegico refrattario, incluso quello post-CEC.",
@@ -252,7 +252,7 @@ const FARMACI = [
  id:"ntg", n:"Nitroglicerina", s:"trinitrina TNT venitrin GTN nitro", c:"Nitrato / donatore di NO", cat:"vdil",
  prep:"50 mg in 50 mL G5% (1 mg/mL) o 25 mg/50 mL",
  solv:"G5% o NaCl 0,9%",
- dose:"0,2–10 mcg/kg/min (o 5–200 mcg/min)",
+ dose:"5–200 mcg/min (≈0,07–3 mcg/kg/min); raramente fino a 400 mcg/min (≈5 mcg/kg/min)",
  tit:"Start 5–10 mcg/min (≈0,1–0,2 mcg/kg/min). Raddoppiare o incrementare di 5–10 mcg/min ogni 3–5 min su PAM/dolore/PAOP. Prevalente venodilatazione a basse dosi (riduce precarico e congestione), arteriolare oltre 100–150 mcg/min. Tolleranza dopo 24–48 h: valutare finestra libera o switch. Controindicata se PAS <90, infarto del ventricolo destro, uso recente di inibitori PDE-5.",
  bolo:"Non in infusione continua. Sublinguale 0,3–0,6 mg come alternativa.",
  ph:"3,0–6,5", osm:"≈290–350", ves:"no",
@@ -410,11 +410,11 @@ const FARMACI = [
  prep:"Carico 300 mg in 250 mL G5%; mantenimento 900–1050 mg in 500 mL G5% /24 h. Concentrazioni >2 mg/mL solo per via centrale.",
  solv:"ESCLUSIVAMENTE Glucosata 5% (in NaCl 0,9% precipita/adsorbe)",
  dose:"900–1200 mg/24 h dopo il carico",
- tit:"FA post-cardiochirurgica: 300 mg (5 mg/kg) in 20–60 min, poi 900–1050 mg/24 h. In ACR da FV/TV refrattaria: 300 mg in bolo, poi 150 mg. Dose cumulativa massima 2,2 g/24 h. Rallentare o sospendere se ipotensione (dovuta al solvente polisorbato 80 e all'alcol benzilico) o bradicardia. Sorvegliare QTc, funzione tiroidea ed epatica se prolungato.",
+ tit:"FA post-cardiochirurgica: 300 mg (5 mg/kg) in 20–60 min, poi 900–1050 mg/24 h. In ACR da FV/TV refrattaria: 300 mg in bolo, poi 150 mg. RCP italiano: mantenimento 10–20 mg/kg/24 h, di norma 600–800 fino a 1200 mg/24 h; concentrazione non inferiore a 0,6 mg/mL; preferire set senza DEHP (estrae il plastificante dal PVC). I 2,2 g/24 h sono il limite dei protocolli statunitensi per la TV/FV ricorrente. Rallentare o sospendere se ipotensione (dovuta al solvente polisorbato 80 e all'alcol benzilico) o bradicardia. Sorvegliare QTc, funzione tiroidea ed epatica se prolungato.",
  bolo:"150–300 mg. In ACR bolo rapido; in ritmo perfondente MAI in meno di 10–20 min (ipotensione grave).",
  ph:"3,5–4,5", osm:"≈300 (in G5%)", ves:"alto",
  cvc:"pref", pvc:"temp", picc:"si", mid:"no", ded:false,
- rub:"Il carico va su via lavata; l'infusione di mantenimento richiede filtro in linea (0,22 µm) secondo scheda tecnica per il rischio di precipitazione.",
+ rub:"Il carico va su via lavata; per il mantenimento lume dedicato o condiviso solo con farmaci compatibili. Filtro in linea secondo protocollo locale (l'RCP italiano non lo richiede).",
  inc:["epar","bica","amino","cefa","imip","fenit","furo","panto","mgso4"],
  com:["nora","adre","dobu","dopa","milr","ntg","insu","prpf","fent","mida","esmo","lido","dexm"],
  note:"Vescicante ad alto rischio secondo la lista INS 2024 (segnalate sindromi compartimentali). Per via periferica: solo per la dose di carico, vena grossa, ≤2 mg/mL, durata limitata, sorveglianza stretta; il mantenimento richiede accesso centrale. Flebite chimica molto frequente.",
@@ -454,8 +454,8 @@ const FARMACI = [
  prep:"Fiala 6 mg/2 mL pronta all'uso",
  solv:"NaCl 0,9% (solo per il flush)",
  dose:"Solo in bolo rapidissimo",
- tit:"6 mg in bolo ultrarapido (1–2 s) seguito immediatamente da 20 mL di NaCl 0,9% a pressione e sollevamento dell'arto; se inefficace 12 mg dopo 1–2 min, ripetibile una volta. Emivita <10 s. Da accesso venoso centrale o comunque prossimale dimezzare la dose (3 mg). Rubinetto a tre vie in posizione adiacente al catetere o tecnica a doppia siringa.",
- bolo:"6 mg → 12 mg → 12 mg, sempre con flush rapido di 20 mL.",
+ tit:"6 mg in bolo ultrarapido (1–2 s) seguito immediatamente da 20 mL di NaCl 0,9% a pressione e sollevamento dell'arto; se inefficace 12 mg dopo 1–2 min, poi eventualmente 18 mg (ERC 2021). Emivita <10 s. Da accesso venoso centrale o comunque prossimale dimezzare la dose (3 mg). Rubinetto a tre vie in posizione adiacente al catetere o tecnica a doppia siringa.",
+ bolo:"6 mg → 12 mg → 18 mg (ERC 2021), sempre con flush rapido di 20 mL.",
  ph:"4,5–7,5", osm:"≈290", ves:"no",
  cvc:"si", pvc:"si", picc:"si", mid:"cauto", ded:false,
  rub:"È l'esempio paradigmatico di farmaco da rubinetto: il tre-vie va posizionato il più vicino possibile al sito di inserzione, con la siringa del flush già montata sulla seconda via.",
@@ -533,7 +533,7 @@ const FARMACI = [
  rub:"Preferibile lume dedicato. L'emulsione lipidica è terreno di crescita microbica: siringa e deflussore vanno sostituiti ogni 12 h; il flacone aperto va usato entro 12 h. Non aspirare né rilanciare dalla via.",
  inc:["cisa","atrac","amik","gent","tobra","cipro","fenit","amfb","*Metotrexato","clev"],
  com:["nora","adre","dobu","milr","ntg","epar","fent","remi","mida","dexm","rocu","insu","morf","keta","vaso"],
- note:"Vescicante ad alto rischio nella lista INS 2024 (natura lipidica: assorbimento tissutale refrattario). Il dolore all'iniezione periferica si riduce con lidocaina o con vena di grosso calibro. Apporto lipidico 0,1 g/mL: da conteggiare nel bilancio nutrizionale.",
+ note:"PADIS 2025: per la sedazione leggera del paziente ventilato è suggerita la dexmedetomidina rispetto al propofol; il propofol resta di riferimento per la sedazione profonda e il fast-track. RCP: non indicato per la sedazione in terapia intensiva nei pazienti di età ≤16 anni; non superare 4 mg/kg/h. Vescicante ad alto rischio nella lista INS 2024 (natura lipidica: assorbimento tissutale refrattario). Il dolore all'iniezione periferica si riduce con lidocaina o con vena di grosso calibro. Apporto lipidico 0,1 g/mL: da conteggiare nel bilancio nutrizionale.",
  ant:"Stop, aspirazione, non lavare; impacchi tiepidi, arto elevato, sorveglianza prolungata perché il danno lipidico può manifestarsi tardivamente."
 },
 {
@@ -556,7 +556,7 @@ const FARMACI = [
  prep:"200 mcg in 50 mL NaCl 0,9% (4 mcg/mL)",
  solv:"NaCl 0,9%",
  dose:"0,2–1,4 mcg/kg/h",
- tit:"Start 0,4 mcg/kg/h SENZA dose di carico (il carico causa ipertensione transitoria seguita da ipotensione e bradicardia). Incrementi di 0,1–0,2 mcg/kg/h ogni 30 min. Sedazione cooperativa, non deprime il drive respiratorio: ideale nello svezzamento e nella prevenzione del delirium post-cardiochirurgico. Sospendere o ridurre se FC <50 bpm o ipotensione persistente; sorvegliare la bradicardia nel paziente beta-bloccato o con pacing-dipendenza.",
+ tit:"Start 0,4 mcg/kg/h SENZA dose di carico (il carico causa ipertensione transitoria seguita da ipotensione e bradicardia). Incrementi di 0,1–0,2 mcg/kg/h ogni 30 min. Sedazione cooperativa, non deprime il drive respiratorio: ideale nello svezzamento. PADIS 2025: suggerita rispetto al propofol per la sedazione leggera (meno delirium, più tempo nel target, più bradicardia). In cardiochirurgia il trial DECADE (Lancet 2020) non ha mostrato riduzione di FA né di delirium: non usarla con questo scopo. Sospendere o ridurre se FC <50 bpm o ipotensione persistente; sorvegliare la bradicardia nel paziente beta-bloccato o con pacing-dipendenza.",
  bolo:"Carico 1 mcg/kg in 10 min: di regola OMESSO in cardiochirurgia.",
  ph:"4,5–7,0", osm:"≈290", ves:"no",
  cvc:"si", pvc:"si", picc:"si", mid:"si", ded:false,
@@ -655,7 +655,7 @@ const FARMACI = [
  id:"para", n:"Paracetamolo ev", s:"perfalgan acetaminofene tachipirina", c:"Analgesico-antipiretico", cat:"sed",
  prep:"Flacone 1 g/100 mL pronto",
  solv:"Pronto all'uso",
- dose:"1 g ogni 6–8 h (max 4 g/die; 3 g se peso <50 kg, epatopatia, malnutrizione, alcolismo)",
+ dose:"1 g ogni 6–8 h (max 4 g/die). Peso ≤50 kg: 15 mg/kg per dose, max 60 mg/kg/die. Epatopatia, malnutrizione, alcolismo: max 3 g/die",
  tit:"Cardine dell'analgesia multimodale ERAS cardiac. Infondere in 15 min: l'infusione rapida può causare ipotensione (fino al 10–20% nei critici).",
  bolo:"Non in bolo: sempre in 15 min.",
  ph:"5,5", osm:"≈290", ves:"no",
@@ -728,8 +728,8 @@ const FARMACI = [
  id:"cisa", n:"Cisatracurio", s:"nimbex cisatracurium", c:"Bloccante neuromuscolare benzilisochinolinico", cat:"nmb",
  prep:"Fiala 10 mg/5 mL o 150 mg/30 mL; infusione 150 mg in 50 mL",
  solv:"NaCl 0,9% o G5%",
- dose:"1–3 mcg/kg/min (0,06–0,18 mg/kg/h)",
- tit:"Farmaco di scelta nell'insufficienza renale ed epatica: eliminazione di Hofmann, indipendente dagli organi. Titolare su TOF 1–2/4. Sedazione profonda obbligatoria.",
+ dose:"RCP in ICU: avvio 3 mcg/kg/min (0,18 mg/kg/h), range 0,5–10,2 mcg/kg/min",
+ tit:"Farmaco di scelta nell'insufficienza renale ed epatica: eliminazione di Hofmann, indipendente dagli organi. Titolare su TOF 1–2/4 con ampia variabilità individuale. Sedazione profonda obbligatoria. Sugammadex inefficace: reversal con neostigmina 0,04–0,07 mg/kg (max 5 mg) + atropina/glicopirrolato quando il TOF mostra almeno 2–4 risposte.",
  bolo:"0,15–0,2 mg/kg.",
  ph:"3,0–3,8", osm:"≈290", ves:"cauto",
  cvc:"si", pvc:"si", picc:"si", mid:"si", ded:false,
@@ -788,7 +788,7 @@ const FARMACI = [
  prep:"25.000 UI in 50 mL (500 UI/mL) o 25.000 UI in 250 mL (100 UI/mL)",
  solv:"NaCl 0,9% o G5%",
  dose:"Terapeutica 12–18 UI/kg/h; profilattica 5000 UI sc x2–3/die",
- tit:"Post-cardiochirurgia: nomogramma su aPTT ratio 1,5–2,5 o anti-Xa 0,3–0,7 UI/mL; controllo a 6 h dall'inizio e da ogni variazione. Su ECMO e in circolazione extracorporea i target sono specifici (ACT, anti-Xa). In CEC: 300–400 UI/kg con target ACT >400–480 s. Sospettare HIT se il calo piastrinico è >50% tra la 5ª e la 10ª giornata: calcolare il 4T score, sospendere ogni fonte di eparina (inclusi i lavaggi) e passare ad argatroban o bivalirudina.",
+ tit:"Post-cardiochirurgia: nomogramma su aPTT ratio 1,5–2,5 o anti-Xa 0,3–0,7 UI/mL; controllo a 6 h dall'inizio e da ogni variazione. In ECMO (ELSO 2021): 7–20 UI/kg/h con anti-Xa 0,3–0,7 UI/mL o aPTT 60–90 s; target più bassi nel sanguinamento; l'ACT non ha un target unico validato. In CEC: 300–400 UI/kg con target ACT >400–480 s. Sospettare HIT se il calo piastrinico è >50% tra la 5ª e la 10ª giornata: calcolare il 4T score, sospendere ogni fonte di eparina (inclusi i lavaggi) e passare ad argatroban o bivalirudina.",
  bolo:"Terapeutico 60–80 UI/kg (max 5000 UI). In CEC 300–400 UI/kg.",
  ph:"5,0–7,5", osm:"≈290", ves:"no",
  cvc:"si", pvc:"si", picc:"si", mid:"si", ded:false,
@@ -1253,7 +1253,7 @@ const FARMACI = [
  cvc:"pref", pvc:"cauto", picc:"si", mid:"no", ded:false,
  rub:"Come il cloruro: mai con ceftriaxone, bicarbonato o fosfati.",
  inc:["bica","fosfk","ceftri","mgso4"], com:["nora","adre","epar"],
- note:"Richiede metabolismo epatico per la liberazione del calcio ionizzato: nell'epatopatico grave e nel basso portata preferire il cloruro.",
+ note:"Il calcio del gluconato è disponibile immediatamente anche nell'epatopatico e durante il trapianto di fegato (studi clinici): la scelta tra i due sali dipende dalla quantità di calcio necessaria (il cloruro ne fornisce circa 3 volte di più a parità di volume) e dall'accesso disponibile, non dal metabolismo epatico. [Corretto in v2.0]",
  ant:"Come per il calcio cloruro: ialuronidasi, impacchi tiepidi, sorveglianza per calcinosi."
 },
 {
@@ -2772,9 +2772,29 @@ const VES_LBL = {alto:["Vescicante alto rischio","b-red"], mod:["Vescicante risc
 const VIA_LBL = {pref:["Preferita","ok"], si:["Si","ok"], temp:["Solo temporanea","mid"],
                  cauto:["Con cautela","mid"], no:["No","no"]};
 
+/* ---- coppie con dati discordanti o non plausibili (v2.0) ----
+   In v1 queste coppie risultavano «Compatibile in Y» oppure erano dichiarate
+   compatibili da una scheda e incompatibili dall'altra. Si tratta di catecolamine
+   a pH 2,5–5 con farmaci a pH 8–11,6, o di coppie con fonti contrastanti:
+   la compatibilita' non e' confermata e la condotta sicura e' la linea separata. */
+const DISCORD = {
+  "furo|nora": "Furosemide (pH 8–9,3) con noradrenalina (pH 3–4,5): dati discordanti in letteratura (incompatibilita' riportata in diversi studi di miscelazione in Y).",
+  "adre|furo": "Furosemide (pH 8–9,3) con adrenalina (pH 2,5–5): dati discordanti; le catecolamine si degradano in ambiente alcalino.",
+  "insu|nora": "Le due schede riportavano dati opposti (incompatibile/compatibile): dati discordanti in letteratura.",
+  "epar|labe": "Le due schede riportavano dati opposti (incompatibile/compatibile): dati discordanti in letteratura.",
+  "ampsulb|nora": "Ampicillina/sulbactam (pH 8–10) con noradrenalina (pH 3–4,5): compatibilita' non confermata, inattivazione della catecolamina in ambiente alcalino.",
+  "nora|tmpsmx": "Trimetoprim/sulfametossazolo (pH 9,5–11) con noradrenalina (pH 3–4,5): compatibilita' non confermata.",
+  "aciclo|nora": "Aciclovir (pH 10,5–11,6) con noradrenalina (pH 3–4,5): compatibilita' non confermata, rischio di precipitazione e inattivazione.",
+  "ganci|nora": "Ganciclovir (pH 9–11) con noradrenalina (pH 3–4,5): compatibilita' non confermata.",
+  "acetaz|nora": "Acetazolamide (pH 9–10) con noradrenalina (pH 3–4,5): compatibilita' non confermata.",
+  "amio|mgso4": "Amiodarone e magnesio solfato: dati discordanti tra le fonti (compatibilita' riportata in alcuni studi, incompatibilita' in altri).",
+  "prpf|rocu": "Rocuronio e propofol: la scheda tecnica del rocuronio riporta incompatibilita' con le emulsioni lipidiche; altri dati riportano compatibilita' in Y: mai nella stessa siringa, preferire linee separate."
+};
+
 /* ---- verdetto compatibilita' in Y ---- */
 function verdetto(a, b){
   if(a.id === b.id) return {lvl:"nd", t:"Stesso farmaco", msg:"Seleziona due farmaci diversi."};
+  const kDis = [a.id, b.id].sort().join("|");
   const listato = x => (x||[]).filter(v => !String(v).startsWith("*"));
   const incAB = listato(a.inc).includes(b.id) || listato(b.inc).includes(a.id);
   const comAB = listato(a.com).includes(b.id) || listato(b.com).includes(a.id);
@@ -2786,14 +2806,23 @@ function verdetto(a, b){
   const pa = phRange(a.ph), pb = phRange(b.ph);
   let phWarn = null;
   if(pa && pb){
-    if((pa.max < 5 && pb.min > 9) || (pb.max < 5 && pa.min > 9))
+    // v2.0: soglie inclusive (in v1 «> 8» escludeva la furosemide, pH 8,0–9,3)
+    if((pa.max < 5 && pb.min >= 9) || (pb.max < 5 && pa.min >= 9))
       phWarn = `Divario di pH estremo (${a.ph} contro ${b.ph}): rischio elevato di precipitazione alla confluenza anche in assenza di dato specifico.`;
-    else if((pa.max < 5 && pb.min > 8) || (pb.max < 5 && pa.min > 8))
+    else if((pa.max < 5 && pb.min >= 8) || (pb.max < 5 && pa.min >= 8))
       phWarn = `Differenza di pH marcata (${a.ph} contro ${b.ph}): valutare lavaggio o lume separato.`;
   }
 
+  if(DISCORD[kDis]) return {lvl:"mid", t:"Dati discordanti — linee separate",
+    msg: DISCORD[kDis] + " Comportamento prudenziale: lumi separati, oppure sospendere, lavare con 10 mL di NaCl 0,9%, somministrare e lavare di nuovo.",
+    extra, phWarn};
+
   if(incAB) return {lvl:"no", t:"INCOMPATIBILE in Y",
     msg:"Incompatibilita' documentata alle concentrazioni standard. Non co-somministrare al raccordo: usare lumi separati oppure sospendere, lavare con 10 mL di NaCl 0,9%, somministrare, lavare nuovamente.",
+    extra, phWarn};
+
+  if(comAB && (a.ded || b.ded)) return {lvl:"mid", t:"Compatibilità riportata, ma linea dedicata raccomandata",
+    msg:"Esiste un dato di compatibilità per questa coppia, ma almeno uno dei due farmaci richiede per scheda una linea o un lume dedicato: co-infondere solo se non esiste alternativa, con sorveglianza della linea.",
     extra, phWarn};
 
   if(comAB) return {lvl:"ok", t:"Compatibile in Y",
@@ -3048,10 +3077,10 @@ function renderLume(){
     for(let j = i + 1; j < lume.length; j++){
       const a = IDX[lume[i]], b = IDX[lume[j]], v = verdetto(a, b);
       const cl = {ok:"ok", no:"no", mid:"mid", nd:"nd"}[v.lvl];
-      const et = {ok:"Compatibile", no:"INCOMPATIBILE", mid:"Rischio strutturale", nd:"Dato assente"}[v.lvl];
+      const et = {ok:"Compatibile", no:"INCOMPATIBILE", mid:"Attenzione", nd:"Dato assente"}[v.lvl];
       rows += `<tr><td class="nm">${a.n}</td><td class="nm">${b.n}</td><td class="${cl}">${et}</td></tr>`;
       if(v.lvl === "no") allarmi.push(`Separare <strong>${a.n}</strong> e <strong>${b.n}</strong>: incompatibilita' documentata.`);
-      if(v.lvl === "mid") allarmi.push(`Verificare <strong>${a.n}</strong> con <strong>${b.n}</strong>: divario di pH significativo.`);
+      if(v.lvl === "mid") allarmi.push(`Verificare <strong>${a.n}</strong> con <strong>${b.n}</strong>: ${v.t.toLowerCase()}.`);
     }
   }
   lume.map(id => IDX[id]).filter(f => f.ded).forEach(f =>
@@ -3112,90 +3141,141 @@ function renderBoli(){
 }
 $("#qBolo").addEventListener("input", renderBoli);
 
-/* ---- calcolatore ---- */
+/* ---- calcolatore (riscritto in v2.0) ----
+   v1: le modalità in mg (mg/h, mg/kg/h) erano convertite con un fattore errato
+   di 10^6 (propofol 2 mg/kg/h → «0,00 mL/h»); il peso vuoto diventava 70 kg;
+   cambiando unità il numero restava invariato. Ora ogni unità è convertita,
+   il peso non ha valori di ripiego e la dose fisica si conserva al cambio di unità. */
 const PRESET = {
-  nora:{mg:8,  vol:50, u:"mg", mode:"mcgkgmin", d:0.1},
-  adre:{mg:4,  vol:50, u:"mg", mode:"mcgkgmin", d:0.05},
-  dobu:{mg:250,vol:50, u:"mg", mode:"mcgkgmin", d:5},
-  dopa:{mg:400,vol:50, u:"mg", mode:"mcgkgmin", d:5},
-  milr:{mg:20, vol:50, u:"mg", mode:"mcgkgmin", d:0.375},
-  levo:{mg:12.5,vol:250,u:"mg",mode:"mcgkgmin", d:0.1},
-  vaso:{mg:20, vol:50, u:"UI", mode:"UImin",    d:0.03},
-  ntg: {mg:50, vol:50, u:"mg", mode:"mcgkgmin", d:0.5},
-  snp: {mg:50, vol:250,u:"mg", mode:"mcgkgmin", d:0.3},
-  esmo:{mg:2500,vol:250,u:"mg",mode:"mcgkgmin", d:50},
-  prpf:{mg:1000,vol:50,u:"mg", mode:"mgkgh",    d:2},
-  mida:{mg:100,vol:50, u:"mg", mode:"mgkgh",    d:0.05},
-  dexm:{mg:200,vol:50, u:"mcg",mode:"mgkgh",    d:0.0007},
-  remi:{mg:5,  vol:50, u:"mg", mode:"mcgkgmin", d:0.1},
-  fent:{mg:2500,vol:50,u:"mcg",mode:"mgkgh",    d:0.002},
-  cisa:{mg:150,vol:50, u:"mg", mode:"mcgkgmin", d:2},
-  epar:{mg:25000,vol:50,u:"UI",mode:"UIkgh",    d:15},
-  insu:{mg:50, vol:50, u:"UI", mode:"UImin",    d:0.033},
-  furo:{mg:250,vol:50, u:"mg", mode:"mgh",      d:5},
-  amio:{mg:900,vol:500,u:"mg", mode:"mgh",      d:37.5}
+  nora:[8,"mg",50,"mcg/kg/min",0.05],   adre:[4,"mg",50,"mcg/kg/min",0.03],
+  dobu:[250,"mg",50,"mcg/kg/min",5],     dopa:[400,"mg",50,"mcg/kg/min",5],
+  milr:[20,"mg",50,"mcg/kg/min",0.375],  levo:[12.5,"mg",250,"mcg/kg/min",0.1],
+  enox:[100,"mg",40,"mcg/kg/min",5],     vaso:[20,"UI",50,"UI/min",0.03],
+  terl:[4,"mg",48,"mg/h",0.083],         angi:[2.5,"mg",500,"ng/kg/min",20],
+  feni:[10,"mg",100,"mcg/kg/min",0.3],   isop:[2,"mg",50,"mcg/min",2],
+  blume:[100,"mg",50,"mg/kg/h",0.5],     ntg:[50,"mg",50,"mcg/min",10],
+  snp:[50,"mg",250,"mcg/kg/min",0.3],    urap:[250,"mg",50,"mg/h",9],
+  clev:[25,"mg",50,"mg/h",2],            nica:[25,"mg",250,"mg/h",5],
+  labe:[200,"mg",200,"mg/min",1],        esmo:[2500,"mg",250,"mcg/kg/min",50],
+  dilt:[100,"mg",100,"mg/h",5],          clon:[750,"mcg",50,"mcg/kg/h",0.3],
+  amio:[900,"mg",500,"mg/min",1],        lido:[2000,"mg",500,"mg/min",1],
+  mgso4:[2,"g",100,"g/h",0.5],           prpf:[1000,"mg",50,"mg/kg/h",1],
+  mida:[100,"mg",50,"mg/kg/h",0.03],     dexm:[200,"mcg",50,"mcg/kg/h",0.4],
+  remi:[5,"mg",50,"mcg/kg/min",0.05],    fent:[2500,"mcg",50,"mcg/h",50],
+  sufe:[250,"mcg",50,"mcg/kg/h",0.2],    morf:[50,"mg",50,"mg/h",2],
+  keta:[500,"mg",50,"mg/kg/h",0.1],      rocu:[500,"mg",50,"mcg/kg/min",5],
+  cisa:[150,"mg",50,"mcg/kg/min",3],     epar:[25000,"UI",50,"UI/kg/h",12],
+  argt:[250,"mg",250,"mcg/kg/min",0.5],  biva:[250,"mg",50,"mg/kg/h",0.05],
+  txa:[1000,"mg",100,"mg/kg/h",1],       insu:[50,"UI",50,"UI/h",2],
+  kcl:[40,"mEq",100,"mEq/h",10],         furo:[250,"mg",50,"mg/h",5],
+  idro:[200,"mg",50,"mg/h",8.3],         panto:[80,"mg",50,"mg/h",8],
+  octreo:[500,"mcg",50,"mcg/h",25],      cangr:[50,"mg",250,"mcg/kg/min",0.75],
+  tirof:[12.5,"mg",250,"mcg/kg/min",0.15]
 };
-const FAT = {mg:1000, mcg:1, g:1e6, UI:1};
+const CU = { ng:["m",1e-6], mcg:["m",1e-3], mg:["m",1], g:["m",1e3], UI:["u",1], mEq:["e",1] };
+let cLast = "dose", cPrevUnit = null;
+
+function cParse(u){ const p = u.split("/"); return {m:p[0], kg:p.length === 3, t:p[p.length-1]}; }
+function cAmt(v, a, b){ const A = CU[a], B = CU[b]; if(!A || !B || A[0] !== B[0]) return null; return v * A[1] / B[1]; }
+function cConvDose(v, from, to, W){
+  const f = cParse(from), t = cParse(to);
+  if((f.kg || t.kg) && !(W > 0)) return NaN;
+  const perMin = v * (f.kg ? W : 1) / (f.t === "h" ? 60 : 1);
+  const x = cAmt(perMin, f.m, t.m); if(x === null) return null;
+  return x * (t.t === "h" ? 60 : 1) / (t.kg ? W : 1);
+}
+function cNum(id){ const v = parseFloat(String($(id).value).replace(",", ".")); return isFinite(v) && v >= 0 ? v : NaN; }
+function cW(){ const v = cNum("#cPeso"); return v >= 0.3 && v <= 350 ? v : NaN; }
+function cFmt(v){
+  if(v === null || !isFinite(v)) return "—";
+  if(v === 0) return "0";
+  const a = Math.abs(v);
+  const dec = a >= 1000 ? 0 : a >= 100 ? 1 : a >= 1 ? 2 : Math.min(8, 2 - Math.floor(Math.log10(a)));
+  let s = (v * (1 + 1e-12)).toFixed(dec);
+  if(s.indexOf(".") > -1) s = s.replace(/0+$/, "").replace(/\.$/, "");
+  return s.replace(".", ",");
+}
+const cIn = v => cFmt(v).replace(",", ".");
 
 function popolaSelect(){
   const s = $("#cFarmaco");
   s.innerHTML = '<option value="">— generico / manuale —</option>' +
-    Object.keys(PRESET).map(k => `<option value="${k}">${IDX[k].n}</option>`).join("");
+    Object.keys(PRESET).filter(k => IDX[k]).sort((a, b) => IDX[a].n.localeCompare(IDX[b].n))
+      .map(k => `<option value="${k}">${IDX[k].n}</option>`).join("");
   s.addEventListener("change", () => {
-    const p = PRESET[s.value]; if(!p) return;
-    $("#cMg").value = p.mg; $("#cVol").value = p.vol; $("#cUnit").value = p.u;
-    $("#cMode").value = p.mode; $("#cDose").value = p.d; calcola("dose");
+    const p = PRESET[s.value]; if(!p){ calcola(); return; }
+    $("#cMg").value = p[0]; $("#cUnit").value = p[1]; $("#cVol").value = p[2];
+    $("#cMode").value = p[3]; cPrevUnit = p[3];
+    $("#cDose").value = p[4]; cLast = "dose"; calcola();
   });
 }
 
-function conc(){ // unita' base per mL (mcg/mL, oppure UI/mL)
-  const q = parseFloat($("#cMg").value), v = parseFloat($("#cVol").value), u = $("#cUnit").value;
-  if(!q || !v) return null;
-  return {val: q * FAT[u] / v, isUI: u === "UI"};
-}
-function calcola(src){
-  const c = conc(), peso = parseFloat($("#cPeso").value) || 70, mode = $("#cMode").value;
-  const out = $("#cOut");
-  if(!c){ out.innerHTML = '<p class="sub">Inserisci quantita\' e volume.</p>'; return; }
-  const K = {mcgkgmin: peso*60, mcgmin: 60, mgh: 1/1000, mgkgh: peso/1000, UImin: 60, UIkgh: peso, ngkgmin: peso*60/1000};
-  const k = K[mode]; // dose * k = unita' base / ora
-  if(src === "dose"){
-    const d = parseFloat($("#cDose").value) || 0;
-    $("#cRate").value = (d * k / c.val).toFixed(2);
+function calcola(){
+  const unit = $("#cMode").value, p = cParse(unit), W = cW();
+  const q = cNum("#cMg"), qu = $("#cUnit").value, vol = cNum("#cVol");
+  const conc = (q > 0 && vol > 0) ? q / vol : NaN;
+  const out = $("#cOut"), msg = [];
+  const compatibile = cAmt(1, p.m, qu) !== null;
+  if(!compatibile) msg.push(`Unità non convertibili: dose in «${p.m}» e preparazione in «${qu}». Allinea massa con massa, UI con UI, mEq con mEq.`);
+  if(p.kg && !(W > 0)) msg.push("<strong>Peso mancante o non valido</strong> (0,3–350 kg): necessario per le unità per kg. Nessun peso di ripiego.");
+  ["#cDose","#cRate","#cMg","#cVol","#cPeso"].forEach(id => {
+    if($(id).value !== "" && !isFinite(cNum(id))) msg.push("Valori negativi o non numerici non ammessi.");
+  });
+
+  let dose = NaN, rate = NaN;
+  const ok = isFinite(conc) && compatibile && (!p.kg || W > 0);
+  if(cLast === "rate"){
+    rate = cNum("#cRate");
+    if(ok && isFinite(rate)) dose = cAmt(rate / 60 * conc, qu, p.m) * (p.t === "h" ? 60 : 1) / (p.kg ? W : 1);
+    $("#cDose").value = isFinite(dose) ? cIn(dose) : "";
   } else {
-    const r = parseFloat($("#cRate").value) || 0;
-    $("#cDose").value = (r * c.val / k).toFixed(4);
+    dose = cNum("#cDose");
+    if(ok && isFinite(dose)) rate = cAmt(dose * (p.kg ? W : 1) / (p.t === "h" ? 60 : 1), p.m, qu) / conc * 60;
+    $("#cRate").value = isFinite(rate) ? cIn(rate) : "";
   }
-  const rate = parseFloat($("#cRate").value) || 0;
-  const dose = parseFloat($("#cDose").value) || 0;
-  const uLbl = c.isUI ? "UI/mL" : "mcg/mL";
+  if(rate > 0 && rate < 0.1) msg.push("Velocità &lt; 0,1 mL/h: sotto la risoluzione di molte pompe-siringa. Usare una preparazione più diluita.");
+  if(rate > 200) msg.push("Velocità &gt; 200 mL/h: improbabile per un'infusione continua. Ricontrollare dose, unità e preparazione.");
+
   const f = IDX[$("#cFarmaco").value];
-  let warn = "";
+  let warn = [...new Set(msg)].map(m => `<div class="warn">⚠ ${m}</div>`).join("");
   if(f){
-    if(f.ves === "alto") warn += `<div class="warn">${f.n}: vescicante ad alto rischio — accesso centrale, verifica del ritorno ematico, nessun bolo sul lume.</div>`;
+    if(f.ves === "alto"){
+      const acc = f.pvc === "no" ? "solo accesso centrale" : f.pvc === "si" ? "periferica ammessa in vena di grosso calibro con sorveglianza del sito" : "accesso centrale preferito, periferica solo temporanea e sorvegliata";
+      warn += `<div class="warn">${f.n}: vescicante ad alto rischio — ${acc}; verificare il ritorno ematico.</div>`;
+    }
     if(f.ded) warn += `<div class="warn">${f.n}: linea o lume dedicato.</div>`;
     warn += `<div class="warn">Range di riferimento: ${f.dose}</div>`;
   }
-  out.innerHTML = `<div class="big">${rate.toFixed(2)} mL/h</div>
-    <div class="sub">Concentrazione ${c.val.toFixed(2)} ${uLbl} — dose impostata ${dose} ${$("#cMode").selectedOptions[0].text} — peso ${peso} kg</div>${warn}`;
-  ladder(k, c.val, dose);
+  if(!isFinite(dose) || !isFinite(rate)){
+    out.innerHTML = `<div class="sub">Inserisci la preparazione e <strong>la dose</strong> (per ottenere i mL/h) oppure <strong>la velocità</strong> (per ottenere la dose): il campo che modifichi guida il calcolo.</div>${warn}`;
+    $("#cLadder").innerHTML = ""; return;
+  }
+  const perH = dose * (p.kg ? W : 1) * (p.t === "min" ? 60 : 1);
+  const aut = vol > 0 && rate > 0 ? Math.round(vol / rate * 60) : NaN;
+  out.innerHTML = `<div class="big">${cFmt(rate)} mL/h</div>
+    <div class="sub">${cFmt(rate / 60)} mL/min · dose ${cFmt(dose)} ${unit} · ${cFmt(perH)} ${p.m}/h (${cFmt(perH * 24)} ${p.m}/24 h)</div>
+    <div class="sub">Concentrazione ${cFmt(conc)} ${qu}/mL${p.kg ? " · peso " + cFmt(W) + " kg" : ""} · autonomia ${isFinite(aut) ? Math.floor(aut / 60) + " h " + String(aut % 60).padStart(2, "0") + " min" : "—"}</div>${warn}`;
+  ladder(dose, unit, rate);
 }
-function ladder(k, cval, dose){
+function ladder(dose, unit, rate){
   if(!dose){ $("#cLadder").innerHTML = ""; return; }
   const passi = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3];
-  const rows = passi.map(p => {
-    const d = dose * p;
-    return `<tr><td class="mono">${(+d.toPrecision(3))}</td><td class="mono">${(d*k/cval).toFixed(2)}</td><td>${p===1?'<span class="ok">dose impostata</span>':(p<1?'riduzione':'incremento')}</td></tr>`;
-  }).join("");
+  const rows = passi.map(p => `<tr><td class="mono">${cFmt(dose * p)} ${unit}</td><td class="mono">${cFmt(rate * p)}</td><td>${p === 1 ? '<span class="ok">dose impostata</span>' : (p < 1 ? "riduzione" : "incremento")}</td></tr>`).join("");
   $("#cLadder").innerHTML = `<div class="table-scroll" style="margin-top:16px"><table class="tbl">
     <thead><tr><th>Dose</th><th>mL/h</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
-["cPeso","cMg","cVol","cUnit","cMode","cDose"].forEach(id => {
-  const el = document.getElementById(id);
-  el.addEventListener("input", () => calcola("dose"));
-  el.addEventListener("change", () => calcola("dose"));
+$("#cDose").addEventListener("input", () => { cLast = "dose"; calcola(); });
+$("#cRate").addEventListener("input", () => { cLast = "rate"; calcola(); });
+["cPeso","cMg","cVol"].forEach(id => $("#" + id).addEventListener("input", calcola));
+$("#cUnit").addEventListener("change", calcola);
+$("#cMode").addEventListener("change", () => {
+  const nu = $("#cMode").value, d = cNum("#cDose");
+  if(cPrevUnit && cPrevUnit !== nu && isFinite(d)){
+    const c = cConvDose(d, cPrevUnit, nu, cW());
+    $("#cDose").value = (c !== null && isFinite(c)) ? cIn(c) : "";
+  }
+  cPrevUnit = nu; cLast = "dose"; calcola();
 });
-$("#cRate").addEventListener("input", () => calcola("rate"));
 
 /* ---- aiuto ---- */
 $("#btnHelp").addEventListener("click", () => {
@@ -3205,13 +3285,15 @@ $("#btnHelp").addEventListener("click", () => {
    <div class="sec"><h4>Come e' costruito il verdetto in Y</h4><p>Il motore interroga prima la matrice coppia-specifica (incompatibilita' e compatibilita' documentate). In assenza di dato applica le regole strutturali: divario di pH, natura dell'emulsione, presenza di calcio, obbligo di linea dedicata. Un esito &laquo;dato non disponibile&raquo; e' un invito alla prudenza, non un via libera.</p></div>
    <div class="sec"><h4>Limiti</h4><p>I dati di compatibilita' sono concentrazione-, solvente- e tempo-dipendenti. Le fonti primarie riportano condizioni sperimentali (di norma osservazione a 1–4 ore a temperatura ambiente) che non coincidono sempre con la pratica. Alcune incompatibilita' producono precipitati submicroscopici non visibili. Le vie di somministrazione riflettono i criteri INS 2024, ERPIUP e GAVeCeLT 2024, ma la decisione finale spetta al protocollo aziendale.</p></div>
    <div class="sec"><h4>Fonti di riferimento</h4><p>Trissel's Handbook on Injectable Drugs; King Guide to Parenteral Admixtures; Riassunti delle Caratteristiche del Prodotto (AIFA/EMA); INS Infusion Therapy Standards of Practice, 9ª edizione, 2024; Gorski et al., Development of an Evidence-Based List of Non-Antineoplastic Vesicants, 2024 Update, J Infus Nurs; ERPIUP consensus (WoCoVA); Raccomandazioni GAVeCeLT 2024; linee guida ESC/EACTS, STS/SCA/AmSECT, ESAIC, Surviving Sepsis Campaign, ERAS Cardiac Society.</p></div>
+   <div class="sec"><h4>Revisione v2.0 (26/10/2026)</h4><p>Corretti il calcolatore (unità in mg errate di un fattore 10<sup>6</sup>), la concentrazione dell'angiotensina II (×1000), il diluente e i contenitori dell'enoximone; 11 coppie con dati discordanti o non plausibili sono ora segnalate come «linee separate». Le coppie di compatibilità derivano da sintesi della letteratura e non sono state verificate una per una sul Trissel's (banca dati a licenza): validarle con la Farmacia prima dell'adozione in reparto.</p></div>
    <div class="sec"><h4>Responsabilita'</h4><p>Strumento di supporto formativo e decisionale per professionisti sanitari. Non sostituisce il giudizio clinico, la scheda tecnica, il protocollo aziendale ne' la consulenza del farmacista ospedaliero.</p></div>`;
   $("#modal").classList.add("is-open");
 });
 
 /* ---- avvio ---- */
 $("#build").textContent = BUILD;
-initChips(); render(); renderVie(); renderBoli(); popolaSelect(); calcola("dose"); renderLume();
+initChips(); render(); renderVie(); renderBoli(); popolaSelect(); cPrevUnit = $("#cMode").value; calcola(); renderLume();
+if("serviceWorker" in navigator){ window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }
 
 /* ============================================================================
    PWA INTEGRATA — nessun file esterno richiesto
@@ -3226,34 +3308,4 @@ const ICONE = {
   imask: "data:image/png;base64,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"
 };
 
-(function installabile(){
-  try{
-    const manifest = {
-      name: "ICU Pharma Cardio",
-      short_name: "ICU Pharma",
-      description: "Terapia infusionale in Terapia Intensiva Cardiochirurgica: titolazione, compatibilita in Y, accessi vascolari, boli.",
-      lang: "it",
-      start_url: location.href.split("#")[0],
-      scope: "./",
-      id: location.pathname,
-      display: "standalone",
-      orientation: "portrait-primary",
-      background_color: "#061829",
-      theme_color: "#0B2545",
-      categories: ["medical", "productivity"],
-      icons: [
-        { src: ICONE.i192,  sizes: "192x192", type: "image/png", purpose: "any" },
-        { src: ICONE.i512,  sizes: "512x512", type: "image/png", purpose: "any" },
-        { src: ICONE.imask, sizes: "512x512", type: "image/png", purpose: "maskable" }
-      ]
-    };
-    const url = URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type:"application/manifest+json"}));
-    const l = document.createElement("link"); l.rel = "manifest"; l.href = url;
-    document.head.appendChild(l);
-
-    const t = document.createElement("link"); t.rel = "apple-touch-icon"; t.href = ICONE.i192;
-    document.head.appendChild(t);
-    const fav = document.createElement("link"); fav.rel = "icon"; fav.type = "image/png"; fav.href = ICONE.i192;
-    document.head.appendChild(fav);
-  } catch(e){ console.warn("Manifest non generato:", e); }
-})();
+/* v2.0: manifest.json, icone PNG e sw.js reali (vedi index.html). Le icone sopra restano per compatibilita'. */

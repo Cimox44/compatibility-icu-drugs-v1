@@ -1,0 +1,19 @@
+{
+  "name": "ICU Pharma Cardio",
+  "short_name": "ICU Pharma",
+  "description": "Terapia infusionale in Terapia Intensiva Cardiochirurgica: titolazione, compatibilità in Y, accessi vascolari, boli.",
+  "lang": "it",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#061829",
+  "theme_color": "#0B2545",
+  "categories": ["medical", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

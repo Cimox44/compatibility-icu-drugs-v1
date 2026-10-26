@@ -10,6 +10,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ICU Pharma">
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 
@@ -165,38 +168,46 @@
           <select id="cFarmaco"></select>
         </label>
         <label>Peso (kg)
-          <input id="cPeso" type="number" min="1" max="250" step="0.5" value="70">
+          <input id="cPeso" type="number" min="0.3" max="350" step="any" inputmode="decimal" value="70">
         </label>
         <label>Quantità in siringa
-          <input id="cMg" type="number" min="0.001" step="0.1" value="8">
+          <input id="cMg" type="number" min="0" step="any" inputmode="decimal" value="8">
         </label>
         <label>Unità
           <select id="cUnit">
             <option value="mg">mg</option>
             <option value="mcg">mcg</option>
-            <option value="UI">UI</option>
             <option value="g">g</option>
+            <option value="UI">UI</option>
+            <option value="mEq">mEq</option>
           </select>
         </label>
         <label>Volume totale (mL)
-          <input id="cVol" type="number" min="1" step="1" value="50">
+          <input id="cVol" type="number" min="0" step="any" inputmode="decimal" value="50">
         </label>
         <label>Modalità dose
           <select id="cMode">
-            <option value="mcgkgmin">mcg/kg/min</option>
-            <option value="mcgmin">mcg/min</option>
-            <option value="mgh">mg/h</option>
-            <option value="mgkgh">mg/kg/h</option>
-            <option value="UImin">UI/min</option>
-            <option value="UIkgh">UI/kg/h</option>
-            <option value="ngkgmin">ng/kg/min</option>
+            <option value="mcg/kg/min">mcg/kg/min</option>
+            <option value="mcg/kg/h">mcg/kg/h</option>
+            <option value="mcg/min">mcg/min</option>
+            <option value="mcg/h">mcg/h</option>
+            <option value="mg/kg/min">mg/kg/min</option>
+            <option value="mg/kg/h">mg/kg/h</option>
+            <option value="mg/min">mg/min</option>
+            <option value="mg/h">mg/h</option>
+            <option value="g/h">g/h</option>
+            <option value="ng/kg/min">ng/kg/min</option>
+            <option value="UI/kg/h">UI/kg/h</option>
+            <option value="UI/min">UI/min</option>
+            <option value="UI/h">UI/h</option>
+            <option value="mEq/h">mEq/h</option>
           </select>
         </label>
         <label>Dose
-          <input id="cDose" type="number" min="0" step="0.01" value="0.1">
+          <input id="cDose" type="number" min="0" step="any" inputmode="decimal" value="0.1">
         </label>
         <label>Velocità (mL/h)
-          <input id="cRate" type="number" min="0" step="0.1">
+          <input id="cRate" type="number" min="0" step="any" inputmode="decimal">
         </label>
       </div>
       <div id="cOut" class="calc-out"></div>
@@ -235,7 +246,7 @@
 </div>
 
 <footer>
-  <p><strong>ICU Pharma Cardio</strong> — build <span id="build"></span>. Dati derivati da RCP italiane, Trissel's <em>Handbook on Injectable Drugs</em>, King Guide to Parenteral Admixtures, INS 2024, GAVeCeLT/ERPIUP, ESC/EACTS/STS/ESAIC. Uso professionale, verifica locale obbligatoria.</p>
+  <p><strong>ICU Pharma Cardio</strong> — build <span id="build"></span>. Dati da RCP italiane, letteratura sulla compatibilità in Y, INS 2024, GAVeCeLT/ERPIUP, ESC/EACTS/STS/ESAIC, ELSO 2021, PADIS 2025. Le coppie di compatibilità vanno validate con la Farmacia. Uso professionale, verifica locale obbligatoria. Funziona offline dopo la prima apertura.</p>
 </footer>
 
 <script src="app.js"></script>
