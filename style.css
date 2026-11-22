@@ -157,6 +157,8 @@ input::placeholder{color:#6D8AA8}
 
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tbl{width:100%;border-collapse:collapse;font-size:.78rem;min-width:620px}
+#tblSol td{white-space:nowrap}
+#tblSol td.nm{white-space:normal;min-width:130px}
 .tbl th{
   text-align:left;padding:9px 10px;background:rgba(18,50,88,.9);color:var(--gold);
   font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;position:sticky;top:0;

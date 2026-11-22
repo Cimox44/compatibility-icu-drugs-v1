@@ -1,9 +1,9 @@
 /* Service worker – ICU Pharma Cardio
-   v2.0 (26/10/2026)
+   v2.1 (22/11/2026)
    - pagina: rete prima, cache come riserva → gli aggiornamenti arrivano senza svuotare la cache
    - app.js, style.css, icone: cache prima
    AD OGNI AGGIORNAMENTO incrementare CACHE (es. icu-pharma-cardio-v2.1). */
-const CACHE = 'icu-pharma-cardio-v2.0';
+const CACHE = 'icu-pharma-cardio-v2.1';
 const ASSETS = ['./', './index.html', './app.js', './style.css', './manifest.json',
   './icon-192.png', './icon-512.png', './icon-512-maskable.png'];
 

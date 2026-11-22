@@ -1,4 +1,4 @@
-# ICU Pharma Cardio — v2.0 (26/10/2026)
+# ICU Pharma Cardio — v2.1 (22/11/2026)
 
 PWA di supporto per la terapia infusionale in Terapia Intensiva Cardiochirurgica: 188 farmaci, compatibilità in Y, simulatore di lume, accesso vascolare, calcolatore di titolazione, boli ed emergenze.
 
@@ -11,9 +11,23 @@ PWA di supporto per la terapia infusionale in Terapia Intensiva Cardiochirurgica
 | app.js | dati dei 188 farmaci, motore di compatibilità, calcolatore |
 | style.css | grafica |
 | manifest.json | installazione come app |
-| sw.js | funzionamento offline (cache `icu-pharma-cardio-v2.0`) |
+| sw.js | funzionamento offline (cache `icu-pharma-cardio-v2.1`) |
 | icon-192.png, icon-512.png, icon-512-maskable.png | icone |
 | README.md | questo file |
+
+## Novità v2.1 (22/11/2026)
+**Nuova funzione: compatibilità con le soluzioni e vie di infusione**
+- Per tutti i 188 farmaci: NaCl 0,9%, glucosata 5%, Ringer lattato, Ringer acetato, acqua ppi (ricostituzione), con codici Sì / Preferita / Stabilità ridotta / No / Dato n.d. / Non applicabile.
+- Riepilogo vie: periferica, CVC, midline, PICC.
+- Visibile nella scheda farmaco e in una nuova tabella filtrabile nella vista «Accesso vascolare».
+- I dati derivano dal campo «solvente» di ogni scheda e dagli RCP citati; per i Ringer il dato è spesso assente («Dato n.d.»): assenza di dato ≠ compatibilità.
+
+**Correzioni**
+- Pantoprazolo (RCP Pantorc, par. 6.3 e 6.6): ricostituzione solo con NaCl 0,9%, diluizione in NaCl 0,9% **o G5%**; la soluzione ricostituita è normalmente **giallognola** (la v2.0 indicava di scartarla se ingiallita); stabilità 12 h a 25 °C.
+- Motore Y: coppie senza dato in cui un farmaco richiede linea dedicata (emoderivati, propofol, fenitoina…) → «Attenzione — linea dedicata richiesta» invece di «Dato non disponibile».
+- Preset bivalirudina allineato alla scheda (250 mg/500 mL = 0,5 mg/mL; 0,15 mg/kg/h).
+- Noradrenalina: target PAM nello shock settico secondo Surviving Sepsis Campaign 2026.
+- Finestra «Metodo e fonti»: attributo aria-hidden corretto; fonti aggiornate (SSC 2026).
 
 ## Novità v2.0
 **Calcolatore (riscritto)**
@@ -33,7 +47,7 @@ PWA di supporto per la terapia infusionale in Terapia Intensiva Cardiochirurgica
 
 ## Aggiornare
 1. Caricare tutti i file nella radice della repository (Add file → Upload files → Commit).
-2. A ogni modifica aumentare la versione `CACHE` in `sw.js` (es. `icu-pharma-cardio-v2.1`) e `BUILD` in `app.js`.
+2. A ogni modifica aumentare la versione `CACHE` in `sw.js` (es. `icu-pharma-cardio-v2.2`) e `BUILD` in `app.js`.
 3. Sul telefono: aprire l'app online e chiuderla/riaprirla due volte; se resta la versione vecchia, disinstallarla e reinstallarla.
 
 ## Limiti

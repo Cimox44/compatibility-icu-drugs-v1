@@ -21,7 +21,7 @@
    ASSENZA DI DATO NON EQUIVALE A COMPATIBILITA'.
    ========================================================================== */
 
-const BUILD = "v2.0 · 26/10/2026";
+const BUILD = "v2.1 · 22/11/2026";
 
 const CATEGORIE = {
   vaso:  "Vasopressori e inotropi",
@@ -47,7 +47,7 @@ const FARMACI = [
  prep:"8 mg in 50 mL G5% (160 mcg/mL) — alternativa 4 mg/50 mL (80 mcg/mL) o 16 mg/50 mL in restrizione idrica",
  solv:"Glucosata 5% (preferita, stabilizza l'ossidazione) o NaCl 0,9%",
  dose:"0,01–0,5 mcg/kg/min; dosi refrattarie fino a 1–3 mcg/kg/min",
- tit:"Start 0,05 mcg/kg/min. Incrementi di 0,02–0,05 mcg/kg/min ogni 2–5 min su target PAM (di norma 65–75 mmHg; 75–85 se ipertensione cronica o CEC prolungata). Svezzamento a specchio: riduzioni del 10–20% ogni 15–30 min con PAM stabile ≥ target per 30 min. Se >0,5 mcg/kg/min valutare vasopressina 0,03 U/min e/o idrocortisone.",
+ tit:"Start 0,05 mcg/kg/min. Incrementi di 0,02–0,05 mcg/kg/min ogni 2–5 min su target PAM (di norma 65–75 mmHg; 75–85 se ipertensione cronica o CEC prolungata). Svezzamento a specchio: riduzioni del 10–20% ogni 15–30 min con PAM stabile ≥ target per 30 min. Se >0,5 mcg/kg/min valutare vasopressina 0,03 U/min e/o idrocortisone. Nello shock settico (Surviving Sepsis Campaign 2026): PAM iniziale 65 mmHg gestita come intervallo (60–65 mmHg se età ≥65 anni); noradrenalina di prima scelta.",
  bolo:"Infusione continua di regola. Push-dose diluita 5–20 mcg (10 mcg/mL) solo in emergenza, medico presente, monitoraggio invasivo.",
  ph:"3,0–4,5", osm:"≈290–330 (in G5% a 160 mcg/mL)", ves:"alto",
  cvc:"pref", pvc:"temp", picc:"si", mid:"no", ded:false,
@@ -1387,17 +1387,17 @@ const FARMACI = [
 },
 {
  id:"panto", n:"Pantoprazolo", s:"pantorc peptazol PPI inibitore pompa protonica", c:"Inibitore di pompa protonica", cat:"vari",
- prep:"40 mg ricostituiti in NaCl 0,9%; infusione continua 80 mg carico + 8 mg/h in 50 mL",
- solv:"ESCLUSIVAMENTE NaCl 0,9%",
+ prep:"40 mg ricostituiti con 10 mL di NaCl 0,9%; somministrabile tal quale o diluito in 100 mL; infusione continua 80 mg carico + 8 mg/h in 50 mL",
+ solv:"Ricostituzione: SOLO NaCl 0,9% (10 mL). Diluizione: NaCl 0,9% o G5%. Nessun altro solvente (RCP Pantorc, par. 6.6)",
  dose:"40 mg ogni 12–24 h; sanguinamento acuto 80 mg + 8 mg/h",
  tit:"Infusione del bolo in 2–15 min.",
  bolo:"40–80 mg ev in almeno 2 min.",
  ph:"9,0–10,5 (fortemente alcalino)", osm:"≈300", ves:"cauto",
  cvc:"si", pvc:"si", picc:"si", mid:"cauto", ded:true,
- rub:"LUME DEDICATO o lavaggio abbondante prima e dopo: il pH alcalino lo rende incompatibile con la maggior parte dei farmaci di terapia intensiva. La soluzione ricostituita deve restare limpida e incolore; se ingiallisce, scartare.",
+ rub:"LUME DEDICATO o lavaggio abbondante prima e dopo: il pH alcalino lo rende incompatibile con la maggior parte dei farmaci di terapia intensiva. Dopo la ricostituzione la soluzione è limpida e giallognola (aspetto normale, RCP): scartare se torbida, con precipitato o con cambio di colore. Stabilità chimico-fisica 12 h a 25 °C dopo ricostituzione/diluizione.",
  inc:["nora","adre","mida","amio","line","fluc","*maggior parte"],
  com:[],
- note:"Non usare glucosata per la ricostituzione (instabilità).",
+ note:"Ricostituire solo con NaCl 0,9%, non con glucosata né con acqua ppi; la glucosata 5% è ammessa solo per la diluizione successiva (RCP). [Corretto in v2.1]",
  ant:"pH >9: gestire l'infiltrazione come soluzione alcalina."
 },
 {
@@ -2753,6 +2753,54 @@ const REGOLE_RUBINETTO = [
 ];
 
 /* ============================================================================
+   COMPATIBILITA' CON LE SOLUZIONI (v2.1)
+   Ordine: NaCl 0,9% | Glucosata 5% | Ringer lattato | Ringer acetato | Acqua ppi
+   Codici: si = ammessa · pref = preferita · cauto = stabilità ridotta · no = non
+   ammessa · nd = dato non disponibile (verificare RCP) · na = non applicabile
+   (pronto all'uso, non diluire, via non endovenosa).
+   Derivata dal campo «solv» di ogni scheda e dagli RCP citati; i Ringer
+   contengono calcio. Dato assente ≠ compatibilità.
+   ========================================================================== */
+const DIL = {
+  nora:"si,pref,nd,nd,nd", adre:"si,si,nd,nd,nd", dopa:"si,si,nd,nd,nd", dobu:"si,si,nd,nd,nd", milr:"si,pref,nd,nd,nd", levo:"no,si,no,no,nd",
+  enox:"si,no,no,no,si", vaso:"si,si,nd,nd,nd", terl:"si,nd,nd,nd,nd", feni:"si,si,nd,nd,nd", efed:"si,nd,nd,nd,nd", isop:"nd,pref,nd,nd,nd",
+  meta:"si,si,nd,nd,nd", angi:"si,nd,nd,nd,nd", ntg:"si,si,nd,nd,nd", snp:"no,si,no,no,nd", urap:"si,si,nd,nd,nd", clev:"na,na,na,na,na",
+  nica:"si,si,nd,nd,nd", labe:"si,si,nd,nd,nd", esmo:"si,si,nd,nd,nd", meto:"si,nd,nd,nd,nd", clon:"si,si,nd,nd,nd", ilop:"si,si,nd,nd,nd",
+  no:"na,na,na,na,na", amio:"no,si,no,no,nd", lido:"si,si,nd,nd,nd", mgso4:"si,si,nd,nd,nd", aden:"si,nd,nd,nd,nd", digo:"si,si,nd,nd,nd",
+  atro:"si,nd,nd,nd,nd", flec:"cauto,pref,nd,nd,nd", prop:"no,si,nd,nd,nd", prpf:"no,cauto,no,no,no", mida:"si,si,nd,nd,nd", dexm:"si,nd,nd,nd,nd",
+  remi:"si,si,nd,nd,nd", fent:"si,si,nd,nd,nd", sufe:"si,si,nd,nd,nd", morf:"si,si,nd,nd,nd", keta:"si,si,nd,nd,nd", tiop:"si,nd,nd,nd,si",
+  para:"na,na,na,na,na", ketor:"si,si,nd,nd,nd", nalo:"si,si,nd,nd,nd", flum:"si,si,nd,nd,nd", rocu:"si,si,nd,nd,nd", cisa:"si,si,nd,nd,nd",
+  succ:"si,nd,nd,nd,nd", suga:"si,si,nd,nd,nd", neos:"si,nd,nd,nd,nd", epar:"si,si,nd,nd,nd", prot:"si,si,nd,nd,nd", txa:"si,si,nd,nd,nd",
+  argt:"si,si,nd,nd,nd", biva:"si,si,nd,nd,nd", ddavp:"si,nd,nd,nd,nd", fibr:"nd,nd,nd,nd,si", ccp:"nd,nd,nd,nd,si", alte:"si,no,nd,nd,si",
+  vanc:"si,si,nd,nd,nd", teic:"si,si,nd,nd,nd", cefa:"si,si,nd,nd,nd", ceftri:"si,si,no,no,nd", ceftaz:"si,si,nd,nd,nd", pipe:"si,si,nd,nd,nd",
+  mero:"pref,cauto,nd,nd,nd", line:"na,na,na,na,na", dapt:"si,no,si,no,nd", gent:"si,si,nd,nd,nd", amik:"si,si,nd,nd,nd", cipro:"na,na,na,na,na",
+  levof:"na,na,na,na,na", metro:"na,na,na,na,na", fluc:"na,na,na,na,na", casp:"si,no,si,nd,nd", amfb:"no,si,no,no,si", coli:"si,si,nd,nd,nd",
+  tige:"si,si,nd,nd,nd", insu:"si,nd,nd,nd,nd", kcl:"pref,si,nd,nd,nd", bica:"nd,si,no,no,si", cacl:"si,si,nd,nd,nd", cagl:"si,si,nd,nd,nd",
+  nacl3:"na,na,na,na,na", mann:"na,na,na,na,na", gluc:"na,na,na,na,na", npt:"na,na,na,na,na", albu:"na,na,na,na,no", furo:"pref,nd,nd,nd,nd",
+  idro:"si,si,nd,nd,nd", mepr:"si,si,nd,nd,nd", dexa:"si,si,nd,nd,nd", panto:"si,si,no,no,no", ondan:"si,si,nd,nd,nd", metoclo:"si,si,nd,nd,nd",
+  halo:"si,si,nd,nd,nd", leve:"si,si,nd,nd,nd", fenit:"si,no,no,no,nd", blume:"si,pref,nd,nd,nd", glucag:"nd,si,nd,nd,si", etilef:"si,si,nd,nd,nd",
+  dilt:"si,si,nd,nd,nd", verap:"si,si,nd,nd,nd", idral:"si,cauto,nd,nd,nd", enalap:"si,si,nd,nd,nd", fenol:"si,si,nd,nd,nd", isdn:"si,si,nd,nd,nd",
+  silde:"na,na,na,na,na", epopr:"na,na,na,na,na", ibuti:"si,si,nd,nd,nd", verna:"si,si,si,nd,nd", sotal:"si,si,nd,nd,nd", procain:"si,si,nd,nd,nd",
+  loraz:"si,si,nd,nd,nd", diaze:"na,na,na,na,na", etomi:"na,na,na,na,na", sevo:"na,na,na,na,na", metad:"si,nd,nd,nd,nd", tram:"si,si,nd,nd,nd",
+  metam:"si,si,nd,nd,nd", dexket:"si,si,nd,nd,nd", atrac:"si,cauto,nd,nd,nd", vecur:"si,si,nd,nd,nd", pancu:"si,si,nd,nd,nd", feno:"si,nd,nd,nd,nd",
+  valpr:"si,si,nd,nd,nd", lacos:"si,si,si,nd,nd", nimod:"si,si,nd,nd,nd", quetia:"na,na,na,na,na", melat:"na,na,na,na,na", enoxap:"na,na,na,na,na",
+  fonda:"na,na,na,na,na", vitk:"nd,pref,nd,nd,nd", idaruc:"na,na,na,na,na", andex:"si,nd,nd,nd,nd", rfviia:"na,na,na,na,na", cangr:"si,si,nd,nd,nd",
+  tirof:"na,na,na,na,na", asaev:"si,nd,nd,nd,nd", eaca:"si,si,nd,nd,nd", aprot:"si,nd,nd,nd,nd", emazie:"si,no,no,no,no", plasma:"na,na,na,na,na",
+  piastr:"na,na,na,na,na", crio:"na,na,na,na,na", gelat:"na,na,na,na,na", fentol:"si,nd,nd,nd,nd", ialuro:"si,nd,nd,nd,nd", idrocob:"si,nd,nd,nd,nd",
+  tiosolf:"si,si,nd,nd,nd", digifab:"si,nd,nd,nd,nd", biperi:"si,nd,nd,nd,nd", cefep:"si,si,nd,nd,nd", imip:"si,nd,nd,nd,nd", ertap:"si,no,no,no,nd",
+  ampsulb:"si,cauto,nd,nd,nd", oxa:"si,si,nd,nd,nd", rifa:"nd,pref,nd,nd,nd", tmpsmx:"nd,si,nd,nd,nd", clinda:"si,si,nd,nd,nd", azitro:"si,si,nd,nd,nd",
+  tobra:"si,si,nd,nd,nd", ceftolo:"si,si,nd,nd,nd", cefider:"si,si,nd,nd,nd", anidula:"si,si,nd,nd,nd", vorico:"si,si,nd,nd,nd", isavu:"si,si,nd,nd,nd",
+  aciclo:"si,si,nd,nd,nd", ganci:"si,si,nd,nd,nd", fosfo:"nd,pref,nd,nd,nd", fosfk:"si,si,no,no,nd", ringer:"na,na,na,na,na", gluc5:"na,na,na,na,na",
+  lipid:"na,na,na,na,na", tiam:"si,si,nd,nd,nd", salb:"si,nd,nd,nd,nd", ipra:"si,nd,nd,nd,nd", amino:"si,si,nd,nd,nd", nac:"nd,pref,nd,nd,nd",
+  canren:"si,si,nd,nd,nd", acetaz:"si,nd,nd,nd,si", esome:"si,no,no,no,no", famot:"si,si,nd,nd,nd", octreo:"si,nd,nd,nd,nd", ferro:"si,no,no,no,no",
+  epo:"na,na,na,na,na", ivig:"na,na,na,na,na"
+};
+const DIL_SOL = ["NaCl 0,9%","Glucosata 5%","Ringer lattato","Ringer acetato","Acqua ppi"];
+const DIL_LBL = {si:["Sì","ok"], pref:["Preferita","ok"], cauto:["Stabilità ridotta","mid"], no:["No","no"],
+                 nd:["Dato n.d.","nd"], na:["Non applicabile","nd"]};
+function dilCodes(id){ return (DIL[id] || "nd,nd,nd,nd,nd").split(","); }
+
+/* ============================================================================
    MOTORE
    ========================================================================== */
 const IDX = Object.fromEntries(FARMACI.map(f => [f.id, f]));
@@ -2827,6 +2875,10 @@ function verdetto(a, b){
 
   if(comAB) return {lvl:"ok", t:"Compatibile in Y",
     msg:"Compatibilita' documentata alle concentrazioni standard indicate nelle schede. Verificare comunque la concentrazione effettivamente in uso e sorvegliare la linea (torbidita', cristalli, cambio di colore, gas).",
+    extra, phWarn};
+
+  if(a.ded || b.ded) return {lvl:"mid", t:"Dato assente — linea dedicata richiesta",
+    msg:"Nessun dato coppia-specifico e almeno uno dei due farmaci richiede per scheda una linea o un lume dedicato: non co-infondere.",
     extra, phWarn};
 
   if(phWarn) return {lvl:"mid", t:"Dato coppia-specifico assente — allarme strutturale",
@@ -2940,6 +2992,12 @@ function apriScheda(id){
         <div><span>Midline</span>${via("mid")}</div>
         <div><span>Linea dedicata</span><b class="${f.ded?"no":"ok"}">${f.ded ? "Si" : "Non richiesta"}</b></div>
       </div></div>
+
+    <div class="sec"><h4>Compatibilita' con le soluzioni e vie di infusione</h4>
+      <div class="kv">${dilCodes(f.id).map((c, i) => { const [l, k] = DIL_LBL[c] || DIL_LBL.nd; return `<div><span>${DIL_SOL[i]}</span><b class="${k}">${l}</b></div>`; }).join("")}
+        <div><span>Vena periferica</span>${via("pvc")}</div><div><span>CVC</span>${via("cvc")}</div>
+        <div><span>Midline</span>${via("mid")}</div><div><span>PICC</span>${via("picc")}</div></div>
+      <p class="nd" style="margin-top:6px">Diluizione per infusione; «Acqua ppi» si riferisce alla ricostituzione. I Ringer contengono calcio. Dato n.d. = verificare RCP e farmacia.</p></div>
 
     <div class="sec"><h4>Dose di mantenimento</h4><p>${f.dose}</p></div>
     <div class="sec"><h4>Schema di titolazione</h4><p>${f.tit}</p></div>
@@ -3132,6 +3190,16 @@ $$("#accFilter .chip").forEach(b => b.addEventListener("click", () => {
   renderVie();
 }));
 
+/* ---- soluzioni (v2.1) ---- */
+function renderSol(){
+  const q = norm(($("#qSol") ? $("#qSol").value : "").trim());
+  const cell = c => { const [l, k] = DIL_LBL[c] || DIL_LBL.nd; return `<td class="${k}">${l}</td>`; };
+  const vc = v => { const [l, c] = VIA_LBL[v] || VIA_LBL.no; return `<td class="${c}">${l}</td>`; };
+  $("#tblSol").innerHTML = FARMACI.filter(f => !q || norm(f.n + " " + f.s).includes(q)).map(f =>
+    `<tr><td class="nm">${f.n}</td>${dilCodes(f.id).map(cell).join("")}${vc(f.pvc)}${vc(f.cvc)}${vc(f.mid)}${vc(f.picc)}</tr>`).join("");
+}
+if($("#qSol")) $("#qSol").addEventListener("input", renderSol);
+
 /* ---- boli ---- */
 function renderBoli(){
   const q = norm($("#qBolo").value.trim());
@@ -3165,7 +3233,7 @@ const PRESET = {
   sufe:[250,"mcg",50,"mcg/kg/h",0.2],    morf:[50,"mg",50,"mg/h",2],
   keta:[500,"mg",50,"mg/kg/h",0.1],      rocu:[500,"mg",50,"mcg/kg/min",5],
   cisa:[150,"mg",50,"mcg/kg/min",3],     epar:[25000,"UI",50,"UI/kg/h",12],
-  argt:[250,"mg",250,"mcg/kg/min",0.5],  biva:[250,"mg",50,"mg/kg/h",0.05],
+  argt:[250,"mg",250,"mcg/kg/min",0.5],  biva:[250,"mg",500,"mg/kg/h",0.15],
   txa:[1000,"mg",100,"mg/kg/h",1],       insu:[50,"UI",50,"UI/h",2],
   kcl:[40,"mEq",100,"mEq/h",10],         furo:[250,"mg",50,"mg/h",5],
   idro:[200,"mg",50,"mg/h",8.3],         panto:[80,"mg",50,"mg/h",8],
@@ -3284,15 +3352,17 @@ $("#btnHelp").addEventListener("click", () => {
    <div class="sec"><h4>Cosa contiene</h4><p>${FARMACI.length} molecole di uso corrente in terapia intensiva cardiochirurgica, con preparazione standard, schema di titolazione, bolo, pH, osmolarita', rischio vescicante, via di somministrazione ammessa e matrice di compatibilita' in Y.</p></div>
    <div class="sec"><h4>Come e' costruito il verdetto in Y</h4><p>Il motore interroga prima la matrice coppia-specifica (incompatibilita' e compatibilita' documentate). In assenza di dato applica le regole strutturali: divario di pH, natura dell'emulsione, presenza di calcio, obbligo di linea dedicata. Un esito &laquo;dato non disponibile&raquo; e' un invito alla prudenza, non un via libera.</p></div>
    <div class="sec"><h4>Limiti</h4><p>I dati di compatibilita' sono concentrazione-, solvente- e tempo-dipendenti. Le fonti primarie riportano condizioni sperimentali (di norma osservazione a 1–4 ore a temperatura ambiente) che non coincidono sempre con la pratica. Alcune incompatibilita' producono precipitati submicroscopici non visibili. Le vie di somministrazione riflettono i criteri INS 2024, ERPIUP e GAVeCeLT 2024, ma la decisione finale spetta al protocollo aziendale.</p></div>
-   <div class="sec"><h4>Fonti di riferimento</h4><p>Trissel's Handbook on Injectable Drugs; King Guide to Parenteral Admixtures; Riassunti delle Caratteristiche del Prodotto (AIFA/EMA); INS Infusion Therapy Standards of Practice, 9ª edizione, 2024; Gorski et al., Development of an Evidence-Based List of Non-Antineoplastic Vesicants, 2024 Update, J Infus Nurs; ERPIUP consensus (WoCoVA); Raccomandazioni GAVeCeLT 2024; linee guida ESC/EACTS, STS/SCA/AmSECT, ESAIC, Surviving Sepsis Campaign, ERAS Cardiac Society.</p></div>
+   <div class="sec"><h4>Fonti di riferimento</h4><p>Trissel's Handbook on Injectable Drugs; King Guide to Parenteral Admixtures; Riassunti delle Caratteristiche del Prodotto (AIFA/EMA); INS Infusion Therapy Standards of Practice, 9ª edizione, 2024; Gorski et al., Development of an Evidence-Based List of Non-Antineoplastic Vesicants, 2024 Update, J Infus Nurs; ERPIUP consensus (WoCoVA); Raccomandazioni GAVeCeLT 2024; linee guida ESC/EACTS, STS/SCA/AmSECT, ESAIC, Surviving Sepsis Campaign 2026 (Intensive Care Med 2026, doi:10.1007/s00134-026-08361-1), ERAS Cardiac Society.</p></div>
    <div class="sec"><h4>Revisione v2.0 (26/10/2026)</h4><p>Corretti il calcolatore (unità in mg errate di un fattore 10<sup>6</sup>), la concentrazione dell'angiotensina II (×1000), il diluente e i contenitori dell'enoximone; 11 coppie con dati discordanti o non plausibili sono ora segnalate come «linee separate». Le coppie di compatibilità derivano da sintesi della letteratura e non sono state verificate una per una sul Trissel's (banca dati a licenza): validarle con la Farmacia prima dell'adozione in reparto.</p></div>
+   <div class="sec"><h4>Revisione v2.1 (22/11/2026)</h4><p>Nuova matrice di compatibilita' con le soluzioni (NaCl 0,9%, glucosata 5%, Ringer lattato e acetato, acqua ppi) per tutti i farmaci, con le vie di infusione (periferica, CVC, midline, PICC), nella scheda e nella vista Accesso vascolare. Pantoprazolo corretto secondo RCP (diluizione anche in G5%; soluzione ricostituita normalmente giallognola). Coppie senza dato con farmaco a linea dedicata: ora «Attenzione». Preset bivalirudina allineato alla scheda. Target PAM della SSC 2026 nella scheda noradrenalina.</p></div>
    <div class="sec"><h4>Responsabilita'</h4><p>Strumento di supporto formativo e decisionale per professionisti sanitari. Non sostituisce il giudizio clinico, la scheda tecnica, il protocollo aziendale ne' la consulenza del farmacista ospedaliero.</p></div>`;
   $("#modal").classList.add("is-open");
+  $("#modal").setAttribute("aria-hidden","false");
 });
 
 /* ---- avvio ---- */
 $("#build").textContent = BUILD;
-initChips(); render(); renderVie(); renderBoli(); popolaSelect(); cPrevUnit = $("#cMode").value; calcola(); renderLume();
+initChips(); render(); renderVie(); renderSol(); renderBoli(); popolaSelect(); cPrevUnit = $("#cMode").value; calcola(); renderLume();
 if("serviceWorker" in navigator){ window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }
 
 /* ============================================================================
