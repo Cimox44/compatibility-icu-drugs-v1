@@ -234,9 +234,16 @@
       <div class="search-wrap">
         <input id="qBolo" type="search" placeholder="Filtra i boli…" autocomplete="off">
       </div>
+      <div class="chips chips-alt" id="boloFilter">
+        <button class="chip is-on" data-bf="all">Tutti</button>
+        <button class="chip" data-bf="bolo">Bolo ammesso</button>
+        <button class="chip" data-bf="mai">MAI in bolo</button>
+        <button class="chip" data-bf="inter">Infusione intermittente</button>
+        <button class="chip" data-bf="cont">Infusione continua</button>
+      </div>
       <div class="table-scroll">
         <table class="tbl">
-          <thead><tr><th>Farmaco</th><th>Bolo / carico</th><th>Velocità max e diluizione</th><th>Rubinetto</th></tr></thead>
+          <thead><tr><th>Farmaco</th><th>Bolo / carico</th><th>Bolo: tempo</th><th>Infusione: durata</th><th>Stabilità e cambio</th><th>Preparazione</th><th>Rubinetto</th></tr></thead>
           <tbody id="tblBoli"></tbody>
         </table>
       </div>

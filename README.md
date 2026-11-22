@@ -1,4 +1,4 @@
-# ICU Pharma Cardio — v2.1 (22/11/2026)
+# ICU Pharma Cardio — v2.2 (22/11/2026)
 
 PWA di supporto per la terapia infusionale in Terapia Intensiva Cardiochirurgica: 188 farmaci, compatibilità in Y, simulatore di lume, accesso vascolare, calcolatore di titolazione, boli ed emergenze.
 
@@ -11,9 +11,22 @@ PWA di supporto per la terapia infusionale in Terapia Intensiva Cardiochirurgica
 | app.js | dati dei 188 farmaci, motore di compatibilità, calcolatore |
 | style.css | grafica |
 | manifest.json | installazione come app |
-| sw.js | funzionamento offline (cache `icu-pharma-cardio-v2.1`) |
+| sw.js | funzionamento offline (cache `icu-pharma-cardio-v2.2`) |
 | icon-192.png, icon-512.png, icon-512-maskable.png | icone |
 | README.md | questo file |
+
+## Novità v2.2 (22/11/2026)
+**Modalità, tempi di somministrazione e stabilità — 112 farmaci**
+Categorie complete: vasopressori e inotropi (17), vasodilatatori e antipertensivi (19), antiaritmici (12), sedazione/analgesia/anestetici (19), bloccanti neuromuscolari e reversal (8), antimicrobici (37). Per ognuno:
+- modalità (bolo diretto, bolo diluito, infusione intermittente, continua, MAI in bolo);
+- tempo del bolo (secondi/minuti, velocità massima);
+- durata/velocità dell'infusione;
+- stabilità dopo ricostituzione e diluizione (ore, temperatura, regola microbiologica);
+- cambio di siringa, sacca e deflussore;
+- fonte (RCP AIFA/EMA o SmPC) con link, livello di certezza e «Note di verifica» (differenze tra RCP e scheda, usi off-label).
+Visibili nella scheda e nella vista «Boli & emergenze» (nuove colonne e filtri: bolo ammesso, MAI in bolo, intermittente, continua). Le altre categorie saranno completate nella revisione di gennaio 2027.
+
+**Diluenti corretti secondo RCP**: blu di metilene (solo G5%, mai NaCl), vasopressina (solo NaCl 0,9%), fosfomicina ev (G5% o acqua ppi, mai NaCl), cotrimossazolo (anche NaCl 0,9%), idralazina (glucosata incompatibile), sugammadex (diluizione solo NaCl). Matrice soluzioni aggiornata per 24 farmaci (Ringer lattato/acetato, glucosata, acqua ppi).
 
 ## Novità v2.1 (22/11/2026)
 **Nuova funzione: compatibilità con le soluzioni e vie di infusione**
@@ -47,7 +60,7 @@ PWA di supporto per la terapia infusionale in Terapia Intensiva Cardiochirurgica
 
 ## Aggiornare
 1. Caricare tutti i file nella radice della repository (Add file → Upload files → Commit).
-2. A ogni modifica aumentare la versione `CACHE` in `sw.js` (es. `icu-pharma-cardio-v2.2`) e `BUILD` in `app.js`.
+2. A ogni modifica aumentare la versione `CACHE` in `sw.js` (es. `icu-pharma-cardio-v2.3`) e `BUILD` in `app.js`.
 3. Sul telefono: aprire l'app online e chiuderla/riaprirla due volte; se resta la versione vecchia, disinstallarla e reinstallarla.
 
 ## Limiti
